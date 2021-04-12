@@ -267,6 +267,7 @@ public class PlayerController : MonoBehaviour
         SwordTriggerOnOff(false);
         //Sets Player's current and sprinting movement speeds.
         UpdateSpeed();
+        rb.freezeRotation = true;
     }
 
     //Update is called every frame.

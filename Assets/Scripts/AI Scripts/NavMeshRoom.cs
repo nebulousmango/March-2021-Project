@@ -27,6 +27,7 @@ public class NavMeshRoom : MonoBehaviour
         }
     }
 
+    //Closes door after Player enters a room.
     private void OnTriggerEnter(Collider other)
     {
         if(other.GetComponentInChildren<PlayerController>() && !b_enteredRoom)

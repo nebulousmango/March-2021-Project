@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
         i_currentHealth = Mathf.Clamp(i_currentHealth, 0, i_totalHealth);
         //Changes health bar's scale based on Enemy health.
         EditHealthBar();
+        Debug.Log(i_currentHealth);
         //Checks if Enemy is dead.
         CheckDie();
     }
@@ -124,7 +125,6 @@ public class Enemy : MonoBehaviour
         GetComponentInChildren<SphereCollider>().enabled = true;
         yield return new WaitForSeconds(F_AttackLifetime);
         GetComponentInChildren<SphereCollider>().enabled = false;
-        ChangeToMoveState();
     }
 
     //Moves Enemy to a new Waypoint.
@@ -138,9 +138,12 @@ public class Enemy : MonoBehaviour
     void ChangeToIdleState()
     {
         b_idle = true;
+        GetComponentInChildren<SphereCollider>().enabled = false;
         animator.SetTrigger("Idle");
     }
     #endregion
+
+    Rigidbody rb;
 
     private void Start()
     {
@@ -153,6 +156,8 @@ public class Enemy : MonoBehaviour
         //Returns value from Enemy's NavMeshAgent component. 
         agent = GetComponent<NavMeshAgent>();
         room = FindObjectOfType<NavMeshRoom>();
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
         ChangeToIdleState();
     }
 
@@ -161,6 +166,7 @@ public class Enemy : MonoBehaviour
         if(b_startedAttacking == false && agent.remainingDistance < 0.1f && b_idle == false)
         {
             Attack();
+            Debug.Log("attack");
         }
     }
 }
