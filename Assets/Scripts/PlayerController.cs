@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
     //Variable to access Player's sword's Box Collider.
     public BoxCollider swordCollider;
     //Variable to set Player's sword's damage.
-    public int I_WeaponDamage = 1;
+    public int I_WeaponDamage;
 
     //Function for when Player's sword comes in contact with Enemy object.
     private void OnTriggerEnter(Collider other)
@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour
     //Variable to store Player's current health.
     int i_playerCurrentHealth;
     //Variable to set Player's total health.
-    public int i_playerTotalHealth = 100;
+    public int i_playerTotalHealth;
     //Bool for whether Player is alive or not.
     bool b_alive = true;
     //Variable to set Death particle effect.
@@ -214,6 +214,16 @@ public class PlayerController : MonoBehaviour
         EditHealthBar();
         //Checks if Player is dead.
         CheckDeath();
+    }
+
+    //Restores Player's health. 
+    void RestoreHealth()
+    {
+        //Changes Player's health to full if R is pressed.
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ChangeHealth(i_playerTotalHealth);
+        }
     }
 
     //Returns value to use by the HealthBar script's ScaleAnchor function.
@@ -287,6 +297,8 @@ public class PlayerController : MonoBehaviour
             CheckHit();
             //Calls function for camera movement.
             CameraRotate();
+            //Calls function to restore player health.
+            RestoreHealth();
         }
     }
 }

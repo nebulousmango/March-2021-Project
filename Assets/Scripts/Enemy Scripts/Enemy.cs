@@ -15,6 +15,9 @@ public class Enemy : MonoBehaviour
     public int i_totalHealth = 100;
     //Variable to access Enemy's Health Bar script.
     HealthBar health;
+    //Variable to set Enemy's Death particle effect.
+    public GameObject Go_DeathParticle;
+    NavMeshRoom room;
 
     //Function to reduce enemy's health by player's weapon damage.
     public void ChangeHealth(int changeValue)
@@ -54,12 +57,18 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger("Death");
         //Runs coroutine to destroy Enemy object.
         StartCoroutine(DestroyDelay());
+        //Adds to count of room's dead Enemies.
+        room.ChangeDeadCount();
+        //Checks if all Enemies are dead.
+        room.CheckRoomEmpty();
     }
 
     //Coroutine to destroy Enemy object after 2 seconds.
     IEnumerator DestroyDelay()
     {
-        yield return new WaitForSeconds(2);
+        //Plays Enemy's Death particle effect.
+        GameObject currentParticle = GameObject.Instantiate(Go_DeathParticle, transform);
+        yield return new WaitForSeconds(0.6f);
         Destroy(gameObject);
     }
     #endregion
@@ -67,8 +76,6 @@ public class Enemy : MonoBehaviour
     #region AI
     //Variable to access Enemy's NavMeshAgent component.
     NavMeshAgent agent;
-    //Variable to access NavMeshRoom script.
-    NavMeshRoom room;
     //List variable to store waypoint positions.
     List<Vector3> v3_wptPositions = new List<Vector3>();
     //Variable to set Attack particle effect.
@@ -94,7 +101,7 @@ public class Enemy : MonoBehaviour
     //Moves Enemy to random Waypoint.
     void GoToRandomWaypoint()
     {
-        int Rand = Random.Range(0, v3_wptPositions.Count - 1);
+        int Rand = Random.Range(0, v3_wptPositions.Count);
         agent.SetDestination(v3_wptPositions[Rand]);
     }
 
@@ -160,7 +167,8 @@ public class Enemy : MonoBehaviour
         i_currentHealth = i_totalHealth;
         //Returns value from Enemy's NavMeshAgent component. 
         agent = GetComponent<NavMeshAgent>();
-        room = FindObjectOfType<NavMeshRoom>();
+        //Returns NavMeshRoom script.
+        room = GetComponentInParent<NavMeshRoom>();
         ChangeToMoveState();
     }
 

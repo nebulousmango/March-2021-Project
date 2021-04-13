@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemy_EnemiesInThisRoom: []
   dr_Enter: {fileID: 4952650062634525293}
+  dr_Exit: {fileID: 0}
 --- !u!65 &2680808602391251954
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -159,7 +160,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnterDoor
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1745936277712059228, guid: b21681419bc6dd8478ff6f32a5d5fb70, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b21681419bc6dd8478ff6f32a5d5fb70, type: 3}
 --- !u!4 &5649405243668433144 stripped
 Transform:

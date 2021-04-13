@@ -10,7 +10,12 @@ public class NavMeshRoom : MonoBehaviour
     public Enemy[] Enemy_EnemiesInThisRoom;
     //Variable to set entry door.
     public Door dr_Enter;
+    //Variable to set exit door.
     public Door dr_Exit;
+    //Variable to store room's live Enemy count.
+    public int LiveEnemyCount;
+    //Variable to store room's dead Enemy count.
+    public int DeadEnemyCount;
     //Bool to check whether Player has entered room.
     bool b_enteredRoom = false;
 
@@ -19,6 +24,8 @@ public class NavMeshRoom : MonoBehaviour
         //Assigns Waypoint array values from all Waypoint objects in NavMeshRoom.
         Wpt_Arr_Waypoints = GetComponentsInChildren<Waypoint>();
         EnemyWaypointPopulation();
+        //Returns number of live Enemies in room.
+        LiveEnemyCount = Enemy_EnemiesInThisRoom.Length;
     }
 
     //Runs PopulateWaypointPositions function for all Enemies in NavMeshRoom.
@@ -36,8 +43,23 @@ public class NavMeshRoom : MonoBehaviour
         if (other.GetComponentInChildren<PlayerController>() && !b_enteredRoom)
         {
             dr_Enter.CloseDoor();
+            dr_Exit.CloseDoor();
             b_enteredRoom = true;
-            Debug.Log(Enemy_EnemiesInThisRoom.Length);
+        }
+    }
+
+    //Used after each Enemy's death, increases count.
+    public void ChangeDeadCount()
+    {
+        DeadEnemyCount++;
+    }
+
+    //Opens exit door if all Enemies are dead.
+    public void CheckRoomEmpty()
+    {
+        if(DeadEnemyCount == LiveEnemyCount)
+        {
+            dr_Exit.OpenDoor();
         }
     }
 }

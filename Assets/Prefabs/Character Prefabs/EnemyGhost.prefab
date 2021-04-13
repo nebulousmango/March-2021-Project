@@ -473,9 +473,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498ea0acc3389414a9d7538af40c76ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  i_totalHealth: 100
+  i_totalHealth: 75
+  Go_DeathParticle: {fileID: 211091671782501396, guid: 11c4a2cb3396df64fb0087060f7b0192, type: 3}
   Go_AttackParticle: {fileID: 2498585059136205559, guid: c38ff87f2711f464e923a95a064ae8de, type: 3}
-  I_AttackDamage: 20
+  I_AttackDamage: 10
   F_AttackLifetime: 3
 --- !u!195 &8552310094192584334
 NavMeshAgent:
