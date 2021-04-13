@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class RetryMenu : MonoBehaviour
 {
-    //Unity slots to set Retry and Player Health UI objects.
+    //Variables to set Retry and Player Health UI objects.
     public GameObject Go_RetryMenuUI;
     public GameObject Go_PlayerHealthbar;
+    //Bool for whether Retry UI is open or not.
     static bool GameIsPaused = false;
 
     private void Start()
@@ -14,9 +15,10 @@ public class RetryMenu : MonoBehaviour
         //Sets the Retry UI to invisible when starting scene.
         Go_RetryMenuUI.SetActive(false);
     }
-
+    
     private void Update()
     {
+        //Opens and closes Retry UI if Escape key is pressed.
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameIsPaused)
@@ -39,6 +41,7 @@ public class RetryMenu : MonoBehaviour
         GameIsPaused = true;
     }
 
+    //Undoes everything that the Retry function does.
     void Resume()
     {
         Go_PlayerHealthbar.SetActive(true);

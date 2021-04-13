@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
 {
     //Variable to access Enemy's animator.
     Animator animator;
-    Rigidbody rb;
 
     #region Non AI
     //Variable to store Enemy's current health.
@@ -79,8 +78,9 @@ public class Enemy : MonoBehaviour
     //Variable to set Enemy's attack length.
     public float F_AttackLifetime = 3;
     //Bool for whether Enemy's attack is active or not. 
-    public bool b_startedAttacking = false;
-    public bool b_idle = true;
+    bool b_startedAttacking = false;
+    //Bool for whether Enemy is in idle state or not.
+    bool b_idle = true;
 
     //Adds positions of Waypoint objects in array to another list.
     public void PopulateWaypointPositions(Waypoint[] waypoints)
@@ -111,10 +111,12 @@ public class Enemy : MonoBehaviour
     //Function for Enemy's attack sequence.
     void Attack()
     {
-        //Starts Attack coroutine and plays Attack particle effect.
         b_startedAttacking = true;
+        //Starts Enemy's Attack animation.
         animator.SetTrigger("Attack");
+        //Starts Attack coroutine.
         StartCoroutine(AttackCoroutine());
+        //Plays Attack particle effect.
         GameObject currentParticle = GameObject.Instantiate(Go_AttackParticle, transform);
         Destroy(currentParticle, F_AttackLifetime);
     }
@@ -122,23 +124,26 @@ public class Enemy : MonoBehaviour
     //Coroutine for Enemy's attack.
     IEnumerator AttackCoroutine()
     {
-        //Enables Enemy's Sphere Collider, waits for Attack particle effect to end, disables Sphere Collider and then changes state.
+        //Enables Enemy's Sphere Collider, waits for Attack particle effect to end, disables Sphere Collider and then changes to move state.
         GetComponentInChildren<SphereCollider>().enabled = true;
         yield return new WaitForSeconds(F_AttackLifetime);
         GetComponentInChildren<SphereCollider>().enabled = false;
         ChangeToMoveState();
     }
 
-    //Moves Enemy to a new Waypoint.
+    //Function for Enemy's move state.
     public void ChangeToMoveState()
     {
+        //Changes bool values used in Update and runs Enemy's Movement function.
         b_idle = false;
         GoToRandomWaypoint();
         b_startedAttacking = false;
     }
 
+    //Function for Enemy's idle state.
     void ChangeToIdleState()
     {
+        //Turns off Enemy's Attack Collider and enables Idle animation.
         b_idle = true;
         GetComponentInChildren<SphereCollider>().enabled = false;
         animator.SetTrigger("Idle");
@@ -156,12 +161,12 @@ public class Enemy : MonoBehaviour
         //Returns value from Enemy's NavMeshAgent component. 
         agent = GetComponent<NavMeshAgent>();
         room = FindObjectOfType<NavMeshRoom>();
-        rb = GetComponent<Rigidbody>();
         ChangeToMoveState();
     }
 
     private void Update()
     {
+        //Starts Attack function if Enemy is in move state and at its waypoint.
         if(b_startedAttacking == false && agent.remainingDistance < 0.1f && b_idle == false)
         {
             Attack();
