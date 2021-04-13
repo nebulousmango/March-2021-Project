@@ -8,7 +8,10 @@ public class NavMeshRoom : MonoBehaviour
     Waypoint[] Wpt_Arr_Waypoints;
     //Array to store which Enemies belong in a NavMeshRoom.
     public Enemy[] Enemy_EnemiesInThisRoom;
+    //Variable to set entry door.
     public Door dr_Enter;
+    public Door dr_Exit;
+    //Bool to check whether Player has entered room.
     bool b_enteredRoom = false;
 
     private void Awake()
@@ -30,10 +33,11 @@ public class NavMeshRoom : MonoBehaviour
     //Closes door after Player enters a room.
     private void OnTriggerEnter(Collider other)
     {
-        if(other.GetComponentInChildren<PlayerController>() && !b_enteredRoom)
+        if (other.GetComponentInChildren<PlayerController>() && !b_enteredRoom)
         {
             dr_Enter.CloseDoor();
             b_enteredRoom = true;
+            Debug.Log(Enemy_EnemiesInThisRoom.Length);
         }
     }
 }
