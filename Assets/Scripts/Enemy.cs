@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 {
     //Variable to access Enemy's animator.
     Animator animator;
+    Rigidbody rb;
 
     #region Non AI
     //Variable to store Enemy's current health.
@@ -25,7 +26,6 @@ public class Enemy : MonoBehaviour
         i_currentHealth = Mathf.Clamp(i_currentHealth, 0, i_totalHealth);
         //Changes health bar's scale based on Enemy health.
         EditHealthBar();
-        Debug.Log(i_currentHealth);
         //Checks if Enemy is dead.
         CheckDie();
     }
@@ -79,8 +79,8 @@ public class Enemy : MonoBehaviour
     //Variable to set Enemy's attack length.
     public float F_AttackLifetime = 3;
     //Bool for whether Enemy's attack is active or not. 
-    bool b_startedAttacking = false;
-    bool b_idle = true;
+    public bool b_startedAttacking = false;
+    public bool b_idle = true;
 
     //Adds positions of Waypoint objects in array to another list.
     public void PopulateWaypointPositions(Waypoint[] waypoints)
@@ -113,6 +113,7 @@ public class Enemy : MonoBehaviour
     {
         //Starts Attack coroutine and plays Attack particle effect.
         b_startedAttacking = true;
+        animator.SetTrigger("Attack");
         StartCoroutine(AttackCoroutine());
         GameObject currentParticle = GameObject.Instantiate(Go_AttackParticle, transform);
         Destroy(currentParticle, F_AttackLifetime);
@@ -125,6 +126,7 @@ public class Enemy : MonoBehaviour
         GetComponentInChildren<SphereCollider>().enabled = true;
         yield return new WaitForSeconds(F_AttackLifetime);
         GetComponentInChildren<SphereCollider>().enabled = false;
+        ChangeToMoveState();
     }
 
     //Moves Enemy to a new Waypoint.
@@ -143,8 +145,6 @@ public class Enemy : MonoBehaviour
     }
     #endregion
 
-    Rigidbody rb;
-
     private void Start()
     {
         //Returns Health Bar script from the Health Bar BG child object.
@@ -157,8 +157,7 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         room = FindObjectOfType<NavMeshRoom>();
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
-        ChangeToIdleState();
+        ChangeToMoveState();
     }
 
     private void Update()
@@ -166,7 +165,6 @@ public class Enemy : MonoBehaviour
         if(b_startedAttacking == false && agent.remainingDistance < 0.1f && b_idle == false)
         {
             Attack();
-            Debug.Log("attack");
         }
     }
 }
