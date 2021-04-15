@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 410458}
   - component: {fileID: 3341716}
   - component: {fileID: 2335058}
+  - component: {fileID: 3289638091772761031}
   m_Layer: 0
   m_Name: Birch_9
   m_TagString: Untagged
@@ -85,3 +86,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!136 &3289638091772761031
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123636}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.7820898
+  m_Height: 7.797269
+  m_Direction: 1
+  m_Center: {x: -0.012072921, y: 3.7478747, z: 0.21660352}

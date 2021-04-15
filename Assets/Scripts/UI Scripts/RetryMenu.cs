@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RetryMenu : MonoBehaviour
@@ -38,14 +36,20 @@ public class RetryMenu : MonoBehaviour
         Go_PlayerHealthbar.SetActive(false);
         //Enables Retry UI.
         Go_RetryMenuUI.SetActive(true);
+        //Pauses game's time.
+        Time.timeScale = 0;
         GameIsPaused = true;
     }
 
     //Undoes everything that the Retry function does.
     void Resume()
     {
+        //Enables Player Health UI.
         Go_PlayerHealthbar.SetActive(true);
+        //Disables Retry UI.
         Go_RetryMenuUI.SetActive(false);
+        //Resumes game's time.
         GameIsPaused = false;
+        Time.timeScale = 1;
     }
 }

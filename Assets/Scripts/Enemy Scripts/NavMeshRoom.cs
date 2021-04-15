@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class NavMeshRoom : MonoBehaviour
 {
-    //Array to store Enemy Waypoints.
-    Waypoint[] Wpt_Arr_Waypoints;
     //Array to store which Enemies belong in a NavMeshRoom.
     public Enemy[] Enemy_EnemiesInThisRoom;
     //Variable to set entry door.
     public Door dr_Enter;
     //Variable to set exit door.
     public Door dr_Exit;
+    //Array to store Enemy Waypoints.
+    Waypoint[] Wpt_Arr_Waypoints;
     //Variable to store room's live Enemy count.
-    public int LiveEnemyCount;
+    int LiveEnemyCount;
     //Variable to store room's dead Enemy count.
-    public int DeadEnemyCount;
+    int DeadEnemyCount;
     //Bool to check whether Player has entered room.
     bool b_enteredRoom = false;
 
@@ -37,7 +37,7 @@ public class NavMeshRoom : MonoBehaviour
         }
     }
 
-    //Closes door after Player enters a room.
+    //Closes all doors after Player enters a room.
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponentInChildren<PlayerController>() && !b_enteredRoom)

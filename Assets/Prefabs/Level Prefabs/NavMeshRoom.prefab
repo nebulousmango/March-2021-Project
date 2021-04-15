@@ -49,6 +49,8 @@ MonoBehaviour:
   Enemy_EnemiesInThisRoom: []
   dr_Enter: {fileID: 4952650062634525293}
   dr_Exit: {fileID: 0}
+  LiveEnemyCount: 0
+  DeadEnemyCount: 0
 --- !u!65 &2680808602391251954
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -61,7 +63,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 10, z: 1}
-  m_Center: {x: -3, y: 0, z: -8}
+  m_Center: {x: -3, y: 0, z: -7.5}
 --- !u!1 &5513145822673359738
 GameObject:
   m_ObjectHideFlags: 0

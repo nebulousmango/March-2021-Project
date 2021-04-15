@@ -9,15 +9,18 @@ public class Enemy : MonoBehaviour
     Animator animator;
 
     #region Non AI
-    //Variable to store Enemy's current health.
-    int i_currentHealth;
     //Variable to set Enemy's total health.
     public int i_totalHealth = 100;
-    //Variable to access Enemy's Health Bar script.
-    HealthBar health;
     //Variable to set Enemy's Death particle effect.
     public GameObject Go_DeathParticle;
+    //Variable to access Enemy's Health Bar script.
+    HealthBar health;
+    //Variable to access NavMeshRoom script.
     NavMeshRoom room;
+    //Variable to store Enemy's current health.
+    int i_currentHealth;
+    //Bool to check whether Enemy has died.
+    bool b_EnemyIsDead = false;
 
     //Function to reduce enemy's health by player's weapon damage.
     public void ChangeHealth(int changeValue)
@@ -28,8 +31,12 @@ public class Enemy : MonoBehaviour
         i_currentHealth = Mathf.Clamp(i_currentHealth, 0, i_totalHealth);
         //Changes health bar's scale based on Enemy health.
         EditHealthBar();
-        //Checks if Enemy is dead.
-        CheckDie();
+        //Runs CheckDie only if Enemy is still alive.
+        if(b_EnemyIsDead == false)
+        {
+            //Checks if Enemy is dead.
+            CheckDie();
+        }
     }
 
     //Returns value to use by the HealthBar script's ScaleAnchor function.
@@ -46,21 +53,20 @@ public class Enemy : MonoBehaviour
         {
             //Runs Enemy death function.
             Die();
+            //Changes bool value so that CheckDie doesn't run again on the same Enemy.
+            b_EnemyIsDead = true;
         }
     }
 
     //Function for when Enemy's health reaches 0.
     void Die()
     {
+        //Stops Enemy's movement and script's coroutines.
         agent.isStopped = true; StopAllCoroutines();
         //Trigger parameter used by Enemy animator.
         animator.SetTrigger("Death");
         //Runs coroutine to destroy Enemy object.
         StartCoroutine(DestroyDelay());
-        //Adds to count of room's dead Enemies.
-        room.ChangeDeadCount();
-        //Checks if all Enemies are dead.
-        room.CheckRoomEmpty();
     }
 
     //Coroutine to destroy Enemy object after 2 seconds.
@@ -70,20 +76,24 @@ public class Enemy : MonoBehaviour
         GameObject currentParticle = GameObject.Instantiate(Go_DeathParticle, transform);
         yield return new WaitForSeconds(0.6f);
         Destroy(gameObject);
+        //Adds to count of room's dead Enemies.
+        room.ChangeDeadCount();
+        //Checks if all Enemies are dead.
+        room.CheckRoomEmpty();
     }
     #endregion
 
     #region AI
-    //Variable to access Enemy's NavMeshAgent component.
-    NavMeshAgent agent;
-    //List variable to store waypoint positions.
-    List<Vector3> v3_wptPositions = new List<Vector3>();
     //Variable to set Attack particle effect.
     public GameObject Go_AttackParticle;
     //Variable to set Enemy's attack damage.
     public int I_AttackDamage = 20;
     //Variable to set Enemy's attack length.
     public float F_AttackLifetime = 3;
+    //Variable to access Enemy's NavMeshAgent component.
+    NavMeshAgent agent;
+    //List variable to store waypoint positions.
+    List<Vector3> v3_wptPositions = new List<Vector3>();
     //Bool for whether Enemy's attack is active or not. 
     bool b_startedAttacking = false;
     //Bool for whether Enemy is in idle state or not.
@@ -163,12 +173,12 @@ public class Enemy : MonoBehaviour
         health = GetComponentInChildren<HealthBar>();
         //Returns animator from the Enemy child object.
         animator = GetComponentInChildren<Animator>();
-        //Sets Enemy current health to total health.
-        i_currentHealth = i_totalHealth;
         //Returns value from Enemy's NavMeshAgent component. 
         agent = GetComponent<NavMeshAgent>();
         //Returns NavMeshRoom script.
         room = GetComponentInParent<NavMeshRoom>();
+        //Sets Enemy current health to total health.
+        i_currentHealth = i_totalHealth;
         ChangeToMoveState();
     }
 

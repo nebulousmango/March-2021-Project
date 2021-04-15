@@ -10,12 +10,12 @@ public class PlayerController : MonoBehaviour
     Animator animator;
 
     #region Camera
-    //Variable to access Main Camera's Camera component.
-    Camera cam;
     //Variable to set camera's horizontal movement speed.
     public float f_horizontalCameraSpeed = 4;
     //Variable to set camera's vertical movement speed.
     public float f_verticalCameraSpeed = 4;
+    //Variable to access Main Camera's Camera component.
+    Camera cam;
 
     //Function for camera movement.
     void CameraRotate()
@@ -40,14 +40,14 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Movement
-    //Variable for Player's current movement speed.
-    float f_currentMoveSpeed;
     //Variable to set Player's base movement speed.
     public float f_baseMoveSpeed;
-    //Variable for Player's sprint speed.
-    float f_sprintSpeed;
     //Variable to multiply Player's base speed by.
     public float f_sprintMult;
+    //Variable for Player's current movement speed.
+    float f_currentMoveSpeed;
+    //Variable for Player's sprint speed.
+    float f_sprintSpeed;
 
     //Sets X and Y motion values for animator component.
     void MovementAnims()
@@ -91,10 +91,10 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Jump
-    //Boolean for whether Player is on the floor or not.
-    bool b_TouchingFloor = false;
     //Variable to multiply Player's jumping height by.
     public float f_jumpForce;
+    //Boolean for whether Player is on the floor or not.
+    bool b_TouchingFloor = false;
 
     //Sets bool to true if Player is in contact with a Floors layer object.
     private void OnCollisionEnter(Collision other)
@@ -188,20 +188,20 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Health
-    //Variable to access Player's Health Bar script.
-    public HealthBar health;
-    //Variable to store Player's current health.
-    int i_playerCurrentHealth;
     //Variable to set Player's total health.
     public int i_playerTotalHealth;
-    //Bool for whether Player is alive or not.
-    bool b_alive = true;
-    //Variable to set Death particle effect.
-    public GameObject Go_DeathParticle;
     //Variable to set Player's Death length.
     public float F_DeathLifetime = 1;
+    //Variable to access Player's Health Bar script.
+    public HealthBar health;
+    //Variable to set Death particle effect.
+    public GameObject Go_DeathParticle;
     //Variable to access RetryMenu script.
     public RetryMenu retryMenu;
+    //Variable to store Player's current health.
+    int i_playerCurrentHealth;
+    //Bool for whether Player is alive or not.
+    bool b_alive = true;
 
     //Changes Player's health based on input.
     public void ChangeHealth(int healthChange)
