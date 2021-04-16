@@ -63,6 +63,8 @@ public class Enemy : MonoBehaviour
     {
         //Stops Enemy's movement and script's coroutines.
         agent.isStopped = true; StopAllCoroutines();
+        //Plays the Enemy Death sound effect through the AudioManager script.
+        FindObjectOfType<AudioManager>().PlaySound("Enemy Death");
         //Trigger parameter used by Enemy animator.
         animator.SetTrigger("Death");
         //Runs coroutine to destroy Enemy object.

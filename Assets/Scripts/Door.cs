@@ -18,15 +18,19 @@ public class Door : MonoBehaviour
         else CloseDoor();
     }
 
-    //Sets trigger for Open Door animation.
+    //Function for opening Door.
     public void OpenDoor()
     {
+        //Sets trigger for Open Door animation.
         animator.SetTrigger("OpenDoor");
+        //Plays the Door sound effect through the AudioManager script.
+        FindObjectOfType<AudioManager>().PlaySound("Door");
     }
 
-    //Sets trigger for Close Door animation.
+    //Function for closing Door.
     public void CloseDoor()
     {
+        //Sets trigger for Close Door animation.
         animator.SetTrigger("CloseDoor");
     }
 }

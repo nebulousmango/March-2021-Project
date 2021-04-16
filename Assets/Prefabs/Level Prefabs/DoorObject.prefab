@@ -125,7 +125,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8458767116154230244}
   - component: {fileID: 9204921402427408241}
-  - component: {fileID: 1745936277712059228}
   m_Layer: 0
   m_Name: DoorObject
   m_TagString: Untagged
@@ -161,16 +160,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   b_startOpen: 0
---- !u!65 &1745936277712059228
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8458767116154230245}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8, y: 10, z: 1}
-  m_Center: {x: 0, y: 1, z: 1.7}

@@ -77,17 +77,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68c384b945523b44c8aad42c0b9eee92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  f_horizontalCameraSpeed: 4
-  f_verticalCameraSpeed: 4
-  f_baseMoveSpeed: 5
-  f_sprintMult: 4
-  f_jumpForce: 300
+  F_baseMoveSpeed: 0
+  F_sprintMult: 0
+  F_jumpForce: 0
   swordCollider: {fileID: 7882816511445158945}
   I_WeaponDamage: 25
-  health: {fileID: 0}
-  i_playerTotalHealth: 150
-  Go_DeathParticle: {fileID: 6041397699676310494, guid: c46577027db8110458042c2853c7fa53, type: 3}
+  I_playerTotalHealth: 0
   F_DeathLifetime: 3
+  health: {fileID: 0}
+  Go_DeathParticle: {fileID: 6041397699676310494, guid: c46577027db8110458042c2853c7fa53, type: 3}
   retryMenu: {fileID: 0}
 --- !u!65 &7882816511445158945
 BoxCollider:
@@ -127,13 +125,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7882816512147482293}
-  m_LocalRotation: {x: 0.17689374, y: 0.040783368, z: -0.024640923, w: 0.9830759}
-  m_LocalPosition: {x: -0.19, y: 2.01, z: -1.21}
+  m_LocalRotation: {x: 0.078638814, y: 0.043040324, z: -0.0013848365, w: 0.9959727}
+  m_LocalPosition: {x: -0.25500044, y: 1.814, z: -1.1649997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3362012092935342075}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 20.476, y: 4.375, z: -2.081}
+  m_LocalEulerAnglesHint: {x: 9.019, y: 4.967, z: 0.233}
 --- !u!20 &7882816512147482295
 Camera:
   m_ObjectHideFlags: 0

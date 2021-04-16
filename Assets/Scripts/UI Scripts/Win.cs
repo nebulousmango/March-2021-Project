@@ -11,6 +11,7 @@ public class Win : MonoBehaviour
     public GameObject Go_WinParticle;
     //Variable to set Player object. 
     public GameObject Go_PlayerObject;
+    public PlayerController player;
 
     //Function for if player passes through Win object. 
     private void OnTriggerEnter(Collider other)
@@ -26,9 +27,13 @@ public class Win : MonoBehaviour
     //Function for Player's win sequence.
     IEnumerator WinGame()
     {
-        //Plays win particle effect, waits for 5 seconds and then loads scene.
+        player.Win();
+        //Plays Win particle effect.
         GameObject currentParticle = GameObject.Instantiate(Go_WinParticle, Go_PlayerObject.transform);
-        yield return new WaitForSeconds(5);
+        //Plays the Win sound effect through the AudioManager script.
+        FindObjectOfType<AudioManager>().PlaySound("Win");
+        //Loads scene after waiting.
+        yield return new WaitForSeconds(6);
         SceneManager.LoadScene(S_SceneName);
     }
 

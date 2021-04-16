@@ -11,9 +11,9 @@ public class PlayerController : MonoBehaviour
 
     #region Camera
     //Variable to set camera's horizontal movement speed.
-    public float f_horizontalCameraSpeed = 4;
+    float f_horizontalCameraSpeed = 4;
     //Variable to set camera's vertical movement speed.
-    public float f_verticalCameraSpeed = 4;
+    float f_verticalCameraSpeed = 4;
     //Variable to access Main Camera's Camera component.
     Camera cam;
 
@@ -41,9 +41,9 @@ public class PlayerController : MonoBehaviour
 
     #region Movement
     //Variable to set Player's base movement speed.
-    public float f_baseMoveSpeed;
+    public float F_baseMoveSpeed;
     //Variable to multiply Player's base speed by.
-    public float f_sprintMult;
+    public float F_sprintMult;
     //Variable for Player's current movement speed.
     float f_currentMoveSpeed;
     //Variable for Player's sprint speed.
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //Function for player movement.
-    void MovePlayer()
+    public void MovePlayer()
     {
         //Uses input from movement keys to set X and Z velocity values.
         Vector3 v3_movement = (transform.right * Input.GetAxis("Horizontal") * f_currentMoveSpeed) + (transform.forward * Input.GetAxis("Vertical") * f_currentMoveSpeed) + (transform.up * rb.velocity.y);
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //Function for player sprinting.
-    void SprintPlayer()
+    public void SprintPlayer()
     {
         //Changes Player to sprint speed if Left Shift is down.
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
         //Returns Player to base speed when Left Shift is up.
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            f_currentMoveSpeed = f_baseMoveSpeed;
+            f_currentMoveSpeed = F_baseMoveSpeed;
         }
     }
 
@@ -84,15 +84,15 @@ public class PlayerController : MonoBehaviour
     void UpdateSpeed()
     {
         //Sets Player's current speed to base speed at Start.
-        f_currentMoveSpeed = f_baseMoveSpeed;
+        f_currentMoveSpeed = F_baseMoveSpeed;
         //Sets Player's sprint speed.
-        f_sprintSpeed = f_baseMoveSpeed * f_sprintMult;
+        f_sprintSpeed = F_baseMoveSpeed * F_sprintMult;
     }
     #endregion
 
     #region Jump
     //Variable to multiply Player's jumping height by.
-    public float f_jumpForce;
+    public float F_jumpForce;
     //Boolean for whether Player is on the floor or not.
     bool b_TouchingFloor = false;
 
@@ -120,15 +120,17 @@ public class PlayerController : MonoBehaviour
     }
 
     //Function for player jumping.
-    void JumpPlayer()
+    public void JumpPlayer()
     {
         //If the spacebar is down and Player is in contact with the floor.
         if (Input.GetKeyDown(KeyCode.Space) && b_TouchingFloor)
         {
             //Adds an upward force to Player based on assigned jump force value.
-            rb.AddForce(transform.up * f_jumpForce);
+            rb.AddForce(transform.up * F_jumpForce);
             //Sets bool for Player's jump animation to true.
             animator.SetBool("AnimCtrl_Jump", true);
+            //Plays the Jump sound effect through the AudioManager script.
+            FindObjectOfType<AudioManager>().PlaySound("Jump");
         }
         //If the spacebar is up and Player is not in contact with the floor.
         if (!Input.GetKeyDown(KeyCode.Space) && b_TouchingFloor)
@@ -170,6 +172,8 @@ public class PlayerController : MonoBehaviour
         {
             //Runs coroutine to turn on sword's Collider.
             StartCoroutine(SlashDelay());
+            //Plays the Attack sound effect through the AudioManager script.
+            FindObjectOfType<AudioManager>().PlaySound("Attack");
             //Triggers parameter used by Player's attack animation.
             animator.SetTrigger("AnimCtrl_Attack");
         }
@@ -189,7 +193,7 @@ public class PlayerController : MonoBehaviour
 
     #region Health
     //Variable to set Player's total health.
-    public int i_playerTotalHealth;
+    public int I_playerTotalHealth;
     //Variable to set Player's Death length.
     public float F_DeathLifetime = 1;
     //Variable to access Player's Health Bar script.
@@ -209,7 +213,7 @@ public class PlayerController : MonoBehaviour
         //Increases Player's current health by function's parameter.
         i_playerCurrentHealth += healthChange;
         //Sets range for Player's current health.
-        i_playerCurrentHealth = Mathf.Clamp(i_playerCurrentHealth, 0, i_playerTotalHealth);
+        i_playerCurrentHealth = Mathf.Clamp(i_playerCurrentHealth, 0, I_playerTotalHealth);
         //Edits Player's health bar.
         EditHealthBar();
         //Checks if Player is dead.
@@ -222,14 +226,14 @@ public class PlayerController : MonoBehaviour
         //Changes Player's health to full if R is pressed.
         if (Input.GetKeyDown(KeyCode.R))
         {
-            ChangeHealth(i_playerTotalHealth);
+            ChangeHealth(I_playerTotalHealth);
         }
     }
 
     //Returns value to use by the HealthBar script's ScaleAnchor function.
     void EditHealthBar()
     {
-        float healthfraction = (float)i_playerCurrentHealth / (float)i_playerTotalHealth;
+        float healthfraction = (float)i_playerCurrentHealth / (float)I_playerTotalHealth;
         health.ScaleAnchor(healthfraction);
     }
 
@@ -242,19 +246,31 @@ public class PlayerController : MonoBehaviour
     //Runs when Player is dead.
     void Die()
     {
+        //Freezes Player's actions in Update.
         b_alive = false;
         //Starts Death coroutine.
         StartCoroutine(DeathCoroutine());
     }
 
+    //Runs when Player enters Win object.
+    public void Win()
+    {
+        //Freezes Player's actions in Update.
+        b_alive = false;
+        //Triggers Win animation.
+        animator.SetTrigger("AnimCtrl_Win");
+    }
+
     //Coroutine for when Player dies.
     IEnumerator DeathCoroutine()
     {
+        //Plays the Player Death sound effect through the AudioManager script.
+        FindObjectOfType<AudioManager>().PlaySound("Player Death");
         //Plays and then destroys Death particle effect.
         GameObject currentParticle = GameObject.Instantiate(Go_DeathParticle, transform);
         Destroy(currentParticle, F_DeathLifetime);
         //Triggers parameter used by Player's death animation.
-        animator.SetTrigger("Death");
+        animator.SetTrigger("AnimCtrl_Death");
         //Waits for particle effect to complete.
         yield return new WaitForSeconds(F_DeathLifetime);
         //Runs RetryMenu script's Retry function.
@@ -272,7 +288,7 @@ public class PlayerController : MonoBehaviour
         //Returns the Player model's animator component.
         animator = GetComponentInChildren<Animator>();
         //Sets Player's current health to total health.
-        i_playerCurrentHealth = i_playerTotalHealth;
+        i_playerCurrentHealth = I_playerTotalHealth;
         //Turns off the Player's sword's Box Collider component. 
         SwordTriggerOnOff(false);
         //Sets Player's current and sprinting movement speeds.
