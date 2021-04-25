@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &309707798134689922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 309707798134689920}
+  - component: {fileID: 309707798134689921}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &309707798134689920
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309707798134689922}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &309707798134689921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309707798134689922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5a2171ee79e2d44b0c09aed955e077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundsData:
+  - AudioSource: {fileID: 0}
+    S_Name: Music
+    AudioClip: {fileID: 8300000, guid: 49d450e97a13b7946a3e2cea8e885553, type: 3}
+    F_Volume: 0.2
+    B_PlayOnAwake: 1
+    B_Loop: 1
+  - AudioSource: {fileID: 0}
+    S_Name: Jump
+    AudioClip: {fileID: 8300000, guid: 507ef3ae9be4c9e4dab65d4cebc51b07, type: 3}
+    F_Volume: 1
+    B_PlayOnAwake: 0
+    B_Loop: 0
+  - AudioSource: {fileID: 0}
+    S_Name: Attack
+    AudioClip: {fileID: 8300000, guid: bae148f219bc39348a6acbcd5e1a2262, type: 3}
+    F_Volume: 0.32
+    B_PlayOnAwake: 0
+    B_Loop: 0
+  - AudioSource: {fileID: 0}
+    S_Name: Player Death
+    AudioClip: {fileID: 8300000, guid: fcb4f62292092184991019a6a887da80, type: 3}
+    F_Volume: 0.56
+    B_PlayOnAwake: 0
+    B_Loop: 0
+  - AudioSource: {fileID: 0}
+    S_Name: Enemy Death
+    AudioClip: {fileID: 8300000, guid: 71efd63da1b202740b599cba142cc738, type: 3}
+    F_Volume: 1
+    B_PlayOnAwake: 0
+    B_Loop: 0
+  - AudioSource: {fileID: 0}
+    S_Name: Door
+    AudioClip: {fileID: 8300000, guid: 7cbecc7f5432daa49a93d3f30098e396, type: 3}
+    F_Volume: 1
+    B_PlayOnAwake: 0
+    B_Loop: 0
+  - AudioSource: {fileID: 0}
+    S_Name: Win
+    AudioClip: {fileID: 8300000, guid: 5a61ff721e2a7d74d903f636985adbf4, type: 3}
+    F_Volume: 1
+    B_PlayOnAwake: 0
+    B_Loop: 0
