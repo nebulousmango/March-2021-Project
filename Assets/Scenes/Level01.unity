@@ -5787,7 +5787,7 @@ Transform:
   - {fileID: 2139710729}
   - {fileID: 37478636}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &440644410 stripped
 Transform:
@@ -8050,7 +8050,7 @@ Transform:
   - {fileID: 442464852}
   - {fileID: 1718875206}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &623059343
 PrefabInstance:
@@ -12976,7 +12976,7 @@ Transform:
   - {fileID: 9115835942943658932}
   - {fileID: 958139639}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1009556642
 PrefabInstance:
@@ -22467,9 +22467,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 152b903df94ece54095dbf940cebde7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  S_LevelOne: LevelOne
-  S_LevelTwo: MainMenu
-  S_LevelThree: 
+  S_LevelA: MainMenu
+  S_LevelB: 
+  S_LevelC: 
+  S_LevelD: 
 --- !u!114 &1718875211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29136,7 +29137,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 309707798134689920, guid: 77ac525aa79829240a2c2ff3405ee851, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 309707798134689920, guid: 77ac525aa79829240a2c2ff3405ee851, type: 3}
       propertyPath: m_LocalPosition.x
@@ -34997,7 +34998,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: 29}
+  m_AnchoredPosition: {x: 2, y: 24.5}
   m_SizeDelta: {x: 128.3793, y: 42.6388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3812812316289639468
@@ -35046,7 +35047,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1718875210}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
-        m_MethodName: LoadLevelOne
+        m_MethodName: RestartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -37843,7 +37844,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1718875210}
         m_TargetAssemblyTypeName: ButtonManager, Assembly-CSharp
-        m_MethodName: LoadLevelTwo
+        m_MethodName: LoadLevelA
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -37878,7 +37879,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: -33}
+  m_AnchoredPosition: {x: 2, y: -24.8}
   m_SizeDelta: {x: 128.3793, y: 42.6388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6747967401624589471
@@ -38756,19 +38757,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3362012092935342075, guid: d9d68165dd90ea946b191f07ee0a5896, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3362012092935342075, guid: d9d68165dd90ea946b191f07ee0a5896, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23
+      value: 22.864
       objectReference: {fileID: 0}
     - target: {fileID: 3362012092935342075, guid: d9d68165dd90ea946b191f07ee0a5896, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.11899996
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3362012092935342075, guid: d9d68165dd90ea946b191f07ee0a5896, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.22
+      value: 8.75
       objectReference: {fileID: 0}
     - target: {fileID: 3362012092935342075, guid: d9d68165dd90ea946b191f07ee0a5896, type: 3}
       propertyPath: m_LocalRotation.w

@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
     bool b_TouchingFloor = false;
 
     //Sets bool to true if Player is in contact with a Floors layer object.
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionStay(Collision other)
     {
         TouchingFloor(other, true, 6);
     }

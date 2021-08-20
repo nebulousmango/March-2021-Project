@@ -6,7 +6,7 @@ public class RetryMenu : MonoBehaviour
     public GameObject Go_RetryMenuUI;
     public GameObject Go_PlayerHealthbar;
     //Bool for whether Retry UI is open or not.
-    static bool GameIsPaused = false;
+    bool GameIsPaused = false;
 
     private void Start()
     {
@@ -51,5 +51,10 @@ public class RetryMenu : MonoBehaviour
         //Resumes game's time.
         GameIsPaused = false;
         Time.timeScale = 1;
+    }
+
+    public void ChangePauseBool()
+    {
+        GameIsPaused = false;
     }
 }

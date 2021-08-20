@@ -3,33 +3,41 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
-    //Variables to set scene names to be loaded. 
-    public string S_LevelOne;
-    public string S_LevelTwo;
-    public string S_LevelThree;
+    [SerializeField] private string S_LevelA;
+    [SerializeField] private string S_LevelB;
+    [SerializeField] private string S_LevelC;
+    [SerializeField] private string S_LevelD;
 
-    //Functions for loading levels. 
-    public void LoadLevelOne()
+    public void LoadLevelA()
     {
-        //Loads new scene.
-        SceneManager.LoadScene(S_LevelOne);
-        //Resumes game's time.
         Time.timeScale = 1;
+        SceneManager.LoadScene(S_LevelA);
     }
 
-    public void LoadLevelTwo()
+    public void LoadLevelB()
     {
-        SceneManager.LoadScene(S_LevelTwo);
         Time.timeScale = 1;
+        SceneManager.LoadScene(S_LevelB);
     }
 
-    public void LoadLevelThree()
+    public void LoadLevelC()
     {
-        SceneManager.LoadScene(S_LevelThree);
         Time.timeScale = 1;
+        SceneManager.LoadScene(S_LevelC);
+    }
+    public void LoadLevelD()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(S_LevelD);
     }
 
-    //Function for quitting game. 
+    public void RestartLevel()
+    {
+        Time.timeScale = 1;
+        FindObjectOfType<RetryMenu>().ChangePauseBool();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public void QuitGame()
     {
         Application.Quit();
